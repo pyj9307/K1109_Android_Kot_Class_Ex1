@@ -61,39 +61,158 @@ class Sub: Super {
     }
 }
 
+open class Super2(name: String) {
+    var superData = 10
+    fun superFun() {
+        println("super class $superData")
+    }
+}
+
+class Sub2(name: String): Super2(name)
+
+open class Super3(name: String) {
+    open var superData = 10
+    open fun superFun() {
+        println("super class $superData")
+    }
+}
+
+class Sub3(name: String): Super3(name) {
+    override var superData = 20
+    override fun superFun() {
+        println("재정의 테스트")
+    }
+}
+
+open class Super4() {
+    var publicData = 10
+    protected var protectedData = 10
+    private var privateData = 10
+}
+
+class Sub4: Super4() {
+    fun subFun() {
+        publicData++
+        protectedData++
+//        privateData++
+    }
+}
+    class NonDataClass (val name: String, val age: Int)
+
+    data class DataClass (val name: String, val age: Int)
+
+// 타입을 명시 안하면 외부에서 사용 못함.
+val obj = object {
+    var data = 10
+    fun some() {
+        println("익명 클래스 테스트")
+    }
+}
+
+open class Super5 {
+    open var publicData = 10
+    open fun some() {
+        println("익명 클래스 사용 테스트 Super5")
+    }
+}
+
+val obj2 = object: Super5() {
+    override var publicData = 20
+    override fun some() {
+        println("익명 클래스 사용 테스트 obj2")
+    }
+}
+
+class MyClass {
+    // 인스턴스 멤버
+    var outData = 20
+    // static과 비슷한 효과, 클래스 멤버
+    companion object {
+        var data = 10
+        fun some() {
+            println("컴패니언 object 테스트")
+        }
+    }
+}
+// 람다 함수 간단 예제(익명함수)
+val sum = {no1:Int, no2:Int -> no1 + no2}
+// 매개변수 1개인 경우, it 사용하기 전.
+val sum2 = {no1:Int -> println(no1)
+30
+}
+// 매개변수 1개인 경우 it 사용하기.
+// 함수 타입 : (Int) -> Unit
+val sum3 = (Int)-> Unit = {println(it)}
+
+
 fun main () {
 
+    val result3 = sum(10,20)
+    val result4 = sum2(10)
+    println("result4의 값 확인해보기 : $result4")
 
-    val user5 = User3("lsy3",30)
+    var result2 = MyClass.data
+    println(result2)
+    MyClass.some()
+    val myClass = MyClass()
+    myClass.outData
+
+    println(obj2.publicData)
+    obj2.some()
+
+    val nonData1 = NonDataClass("lsy1", 30)
+    val nonData2 = NonDataClass("lsy2", 20)
+    val dataClass1 = DataClass("lsy3", 40)
+    val dataClass2 = DataClass("lsy4", 50)
+    println(nonData1.equals(nonData2))
+    println(dataClass1.equals(dataClass2))
+    println(nonData1.toString())
+    println(dataClass2.toString())
+
+    var obj4 = Sub4()
+    obj4.publicData
+//    obj4.protectedData
+//    obj4.privateData
+
+    var obj3 = Sub3("lsy7")
+    println(obj3.superData)
+    obj3.superFun()
+
+    var obj = Sub2("lsy7")
+    println(obj.superData)
+    obj.superFun()
+
+    val user5 = User3("lsy3", 30)
     user5.someFun()
 
-    val user2 = User2("lsy2",30)
-    val user3 = User2("lsy3",30)
-    val user4 = User2("lsy4",30)
+    val user2 = User2("lsy2", 30)
+    val user3 = User2("lsy3", 30)
+    val user4 = User2("lsy4", 30)
 
     var myClass2 = MyClass2()
-    myClass2.age= 20
+    myClass2.age = 20
     println(myClass2.age)
 
     // 객체 생성시 new 없이, 바로 생성자 호출.
     val user = User("lsy2")
     user.someFun()
 
-    var data23 = arrayOf<Int> (10,20,30)
-    for ((index,value) in data23.withIndex()) {
+    var data23 = arrayOf<Int>(10, 20, 30)
+    for ((index, value) in data23.withIndex()) {
         print(value)
-        if (index !== data23.size -1) print(",")
+        if (index !== data23.size - 1) print(",")
     }
 
-    var data22 = arrayOf<Int> (10,20,30)
+    var data22 = arrayOf<Int>(10, 20, 30)
     for (i in data22.indices) {
         print(data22[i])
-            if (i !== data22.size -1) print(",")
+        if (i !== data22.size - 1) print(",")
     }
 
     var sum22: Int = 0
     for (i in 1..10) {
-        sum22 += i}
+        sum22 += i
+    }
     println(sum22)
 
 
@@ -127,7 +246,7 @@ fun main () {
     }
 
     var data = 10
-    var result = if(data>0) {
+    var result = if (data > 0) {
         println("테스트")
         true
     } else {
@@ -138,8 +257,8 @@ fun main () {
 
     // 가변 길이의 리스트, 맵
     val data18 = mutableMapOf<String, Any>()
-    data18.set("key","value")
-    data18.set("key2",2)
+    data18.set("key", "value")
+    data18.set("key2", 2)
 //    data18.set("key3",MyClass2)
     println(data18.get("key"))
     println(data18.get("key2"))
@@ -149,8 +268,8 @@ fun main () {
     data17.add(2)
     println(data17[0])
 
-    val data15 = intArrayOf(10,20,30)
-    val data16 = booleanArrayOf(true,false)
+    val data15 = intArrayOf(10, 20, 30)
+    val data16 = booleanArrayOf(true, false)
     println(
         """
     array size : ${data15.size}
@@ -158,17 +277,17 @@ fun main () {
             """
     )
     println(
-            """
+        """
     array size : ${data16.size}
     array data : ${data16[0]}, ${data16[1]}
             """
-            )
+    )
 
 
-    val data14: Array<Int> = Array(3,{0})
+    val data14: Array<Int> = Array(3, { 0 })
     data14[0] = 10
     data14[1] = 10
-    data14.set(2,30)
+    data14.set(2, 30)
 
     println(
         """
@@ -176,20 +295,20 @@ fun main () {
     array data : ${data14[0]}, ${data14[1]}, ${data14.get(2)}
             """
     )
-    
-    fun some (data1: Int, data2: Int = 10) : Int {
+
+    fun some(data1: Int, data2: Int = 10): Int {
         return data1 * data2
     }
-    println(some(data1=100, data2=200))
+    println(some(data1 = 100, data2 = 200))
 
     fun some2(test: Int, test2: Int): Nothing {
         throw java.lang.Exception()
     }
 
-    var n1 : Int?
+    var n1: Int?
     n1 = null
 
-    var data13 : Nothing? = null
+    var data13: Nothing? = null
 
     var data12: Any = 10
     var data2: Any = "String"
@@ -200,13 +319,14 @@ fun main () {
         println(data2)
         println(data3)
     }
+
     var testxx = test3()
     println(testxx)
 
 
     fun addSum(no: Int): Int {
         var sum = 0
-        for (i in 1..no){
+        for (i in 1..no) {
             sum += i
         }
         return sum
@@ -228,7 +348,7 @@ fun main () {
     data1 = data1.plus(10)
 
     // 함수 내부에서는 선언만 가능.
-    var name10 : String
+    var name10: String
     // 자바에서 쓰던 Myclacss2 myclass2 = new Myclass2(); 을
     var myclass2 = MyClass2()
     // myclass2.name2 = "이상용5" - val 은 재할당 안됨.
@@ -240,5 +360,5 @@ fun main () {
     println(name2)
     println("lazy 테스트 및 결괏값 재할당해서 연산 확인 : ")
     // data4는 최상단에 by lazy 적용
-    println(data4+10)
+    println(data4 + 10)
 }
