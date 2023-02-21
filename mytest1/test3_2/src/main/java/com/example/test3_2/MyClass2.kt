@@ -18,6 +18,34 @@ class MyClass2 {
 }
 
 fun main () {
+    // 가변 길이의 리스트, 맵
+    val data18 = mutableMapOf<String, Any>()
+    data18.set("key","value")
+    data18.set("key2",2)
+//    data18.set("key3",MyClass2)
+    println(data18.get("key"))
+    println(data18.get("key2"))
+
+    val data17 = mutableListOf<Int>()
+    data17.add(1)
+    data17.add(2)
+    println(data17[0])
+
+    val data15 = intArrayOf(10,20,30)
+    val data16 = booleanArrayOf(true,false)
+    println(
+        """
+    array size : ${data15.size}
+    array data : ${data15[0]}, ${data15[1]}, ${data15.get(2)}
+            """
+    )
+    println(
+            """
+    array size : ${data16.size}
+    array data : ${data16[0]}, ${data16[1]}
+            """
+            )
+
 
     val data14: Array<Int> = Array(3,{0})
     data14[0] = 10
@@ -93,5 +121,6 @@ fun main () {
     println(myclass2.name2)
     println(name2)
     println("lazy 테스트 및 결괏값 재할당해서 연산 확인 : ")
+    // data4는 최상단에 by lazy 적용
     println(data4+10)
 }
