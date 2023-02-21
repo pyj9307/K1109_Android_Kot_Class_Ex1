@@ -1,5 +1,7 @@
 package com.example.test3_2
 
+//import sun.jvm.hotspot.oops.CellTypeState.value
+
 //최고 상위 영역, 선언과 동시에 초깃값 할당
 val name = "이상용"
 val name2 :String = "이상용2"
@@ -16,10 +18,69 @@ class MyClass2 {
     val name2 = "이상용4"
 }
 
+class User{
+    var name = "lsy"
+    constructor(name: String){
+        this.name = name
+    }
+    fun someFun() {
+        println("name: $name")
+    }
+}
+
+class User2(val name: String, val age:Int) {
+    init {
+        println("객체 생성 할 때마다 init 실행이 됨")
+    }
+}
+
+//class User3(val: String, val age:Int) {
+class User3(name:String, age:Int) {
+    init {
+        println("init 안에서는 주생성자 매개변수 사용 가능 $name, $age")
+    }
+
+    // var, val로 지정하면, 다른 함수에서도 사용 가능.
+    fun someFun() {
+        println("name: $name")
+    }
+}
+
+class User4(name: String, age: Int, phone: String) {
+    // 실제 작업은 주 생성자에서 선언을 해서 사용을 많이 하는 편
+//class User4(name: String {
+//    constructor(name: String, age: Int):this(name)
+//    constructor(name: String, age: Int, phone: String):this(name,age)
+}
+
+open class Super(name: String) {
+}
+
+class Sub: Super {
+    constructor(name: String): super(name) {
+    }
+}
+
 fun main () {
 
+
+    val user5 = User3("lsy3",30)
+    user5.someFun()
+
+    val user2 = User2("lsy2",30)
+    val user3 = User2("lsy3",30)
+    val user4 = User2("lsy4",30)
+
+    var myClass2 = MyClass2()
+    myClass2.age= 20
+    println(myClass2.age)
+
+    // 객체 생성시 new 없이, 바로 생성자 호출.
+    val user = User("lsy2")
+    user.someFun()
+
     var data23 = arrayOf<Int> (10,20,30)
-    for ((index, value) in data23.withIndex()) {
+    for ((index,value) in data23.withIndex()) {
         print(value)
         if (index !== data23.size -1) print(",")
     }
