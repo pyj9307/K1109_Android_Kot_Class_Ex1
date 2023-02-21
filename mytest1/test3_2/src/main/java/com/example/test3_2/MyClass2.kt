@@ -14,10 +14,67 @@ class MyClass2 {
     var name = "이상용3"
     var age = 40;
     val name2 = "이상용4"
-
 }
 
 fun main () {
+
+    var data23 = arrayOf<Int> (10,20,30)
+    for ((index, value) in data23.withIndex()) {
+        print(value)
+        if (index !== data23.size -1) print(",")
+    }
+
+    var data22 = arrayOf<Int> (10,20,30)
+    for (i in data22.indices) {
+        print(data22[i])
+            if (i !== data22.size -1) print(",")
+    }
+
+    var sum22: Int = 0
+    for (i in 1..10) {
+        sum22 += i}
+    println(sum22)
+
+
+    var data21: Any = "hi"
+    val result21 = when (data21) {
+        is String -> println("data is String")
+        in 1..10 -> println("data is 1..10")
+        else -> {
+            println("data is not valid")
+        }
+
+    }
+    println("when 표현식 사용으로 결괏값 확인 $result21")
+
+    var data20: Any = "hi"
+    when (data20) {
+        is String -> println("data is String")
+        in 1..10 -> println("data is 1..10")
+        else -> {
+            println("data is not valid")
+        }
+    }
+
+    var data19 = "hi"
+    when (data19) {
+        "hi" -> println("data is hi")
+        "hi2" -> println("data is hi2")
+        else -> {
+            println("data is not valid")
+        }
+    }
+
+    var data = 10
+    var result = if(data>0) {
+        println("테스트")
+        true
+    } else {
+        println("else 테스트")
+        false
+    }
+    println("result 결괏값 테스트 : $result")
+
     // 가변 길이의 리스트, 맵
     val data18 = mutableMapOf<String, Any>()
     data18.set("key","value")
