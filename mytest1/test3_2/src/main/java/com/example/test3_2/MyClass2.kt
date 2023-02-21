@@ -97,9 +97,9 @@ class Sub4: Super4() {
 //        privateData++
     }
 }
-    class NonDataClass (val name: String, val age: Int)
+class NonDataClass (val name: String, val age: Int)
 
-    data class DataClass (val name: String, val age: Int)
+data class DataClass (val name: String, val age: Int)
 
 // 타입을 명시 안하면 외부에서 사용 못함.
 val obj = object {
@@ -138,7 +138,7 @@ class MyClass {
 val sum = {no1:Int, no2:Int -> no1 + no2}
 // 매개변수 1개인 경우, it 사용하기 전.
 val sum2 = {no1:Int -> println(no1)
-30
+    30
 }
 
 fun FunTest(arg: (Int) -> Boolean):()->String {
