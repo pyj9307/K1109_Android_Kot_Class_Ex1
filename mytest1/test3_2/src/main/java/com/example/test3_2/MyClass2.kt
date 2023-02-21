@@ -140,16 +140,47 @@ val sum = {no1:Int, no2:Int -> no1 + no2}
 val sum2 = {no1:Int -> println(no1)
 30
 }
-// 매개변수 1개인 경우 it 사용하기.
-// 함수 타입 : (Int) -> Unit
-val sum3 = (Int)-> Unit = {println(it)}
+
+fun FunTest(arg: (Int) -> Boolean):()->String {
+    val result = if(arg(10)){
+        "valid"
+    } else {
+        "invalid"
+    }
+    return{"고차함수 테스트 : $result"}
+}
 
 
 fun main () {
 
+    // ? 연산자를 이용해서 null 할당 가능
+    var data33: String? = "lsy"
+    // ? 연산자를 사용한 변수에 특정 함수에 접근시 ?. 기호를 사용하거나
+    // 또는 !! 예외 발생 연산자를 사용해야함.
+    // 참고. 널체크가 빠지게 되면 컴파일러가 친절히 알려줌.
+    data33?.length
+
+    // 만약에, 널이 아니면 해당 길이를 반환하고,
+    // 만약에 널이면 지정한 값을 사용한다.
+    // nvl 함수와 비슷한 구조
+    // 삼항 다항식 비슷한 구조
+    data33?.length ?: 0
+    println("널 안정성 체크해보기")
+    println(data33?.length ?: 0)
+    println(data33!!.length ?: 0)
+
+    val result5 = FunTest({no -> no>0})
+    println(result5())
+
     val result3 = sum(10,20)
     val result4 = sum2(10)
     println("result4의 값 확인해보기 : $result4")
+
+
+// 매개변수 1개인 경우 it 사용하기.
+// 함수 타입 : (Int)-> Unit
+    val sum3: (Int)-> Unit = {println(it)}
+    sum3(10)
 
     var result2 = MyClass.data
     println(result2)

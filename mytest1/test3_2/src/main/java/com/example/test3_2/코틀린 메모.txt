@@ -407,7 +407,7 @@ it
 ex)it 사용 전 
 val sum = {no1:Int -> println(no1)}
 ex2)it 사용 후 
-val sum: (Int)->Unit = {println(it)}
+val sum: (Int)-> Unit = {println(it)}
 some(10)
 
 34
@@ -417,10 +417,30 @@ val sum: (Int)->Int = {no1:Int -> println(no1)}
 35
 함수 타입 별칭 사용
 ex)typealias MyFunType = (Int,Int) -> Boolean
-ex)val sum MyFunType = {no1:Int, no2:Int -> no21>no2}
+ex)val sum: MyFunType = {no1:Int, no2:Int -> no1>no2}
 
 36
 고차함수
 함수의 매개변수 자리에 함수가 들어가거나 결괏값에 함수가 들어가는 경우
-// 매개변수 자리에 (함수가 들어감) => arg: (Int) -> Boolean
-ex)fun FunTest(arg: (Int) -> Boolean)
+// 매개변수 자리에 함수가 들어감 => arg: (Int) -> Boolean
+ex)fun FunTest(arg: (Int) -> Boolean):()->String {
+val result = if(arg(10)){
+"valid"
+} else {
+"invalid"
+}
+return{"고차함수 테스트 : $result"}
+}
+
+main에서
+val result = FunTest({no -> no>0})
+println(result())
+}
+
+37
+널 안정성
+ex)var data: String? = null
+data?.length ?: 0
+
+예외 발생시키는 연산자
+data!!.length ?: 0
