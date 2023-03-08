@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">K1109_Android_Kot_Class_Ex1</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="longtext">"위키백과 또는 위키피디아는 누구나 자유롭게 쓸 수 있는 다언어판 인터넷 백과사전이다. 개방된 협업을 통해 위키 기반 편집 시스템을 사용하여 자발적인 위키백과 사용자 공동체가 작성하고 관리하고 있다. 위키백과는 대표적인 집단 지성의 사례로 평가받고 있으며 사상 최대의"</string>
 </resources>
