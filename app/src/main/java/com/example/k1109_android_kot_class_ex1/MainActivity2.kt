@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import com.example.k1109_android_kot_class_ex1.databinding.ActivityMain2Binding
 
 
@@ -23,7 +22,7 @@ class MainActivity2 : AppCompatActivity() {
             Log.d("click", "버튼 클릭 테스트중");
             binding.image2.visibility = View.INVISIBLE
         }
-//        val rid : Int = R.id.textView
+        val rid : Int = R.id.textView
 
 
         }
