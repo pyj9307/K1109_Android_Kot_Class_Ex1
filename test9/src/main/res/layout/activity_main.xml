@@ -10,6 +10,44 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/gradient_box" />
+        android:src="@drawable/gradient_box"
+        />
+    <!-- sp는 단말기 설정에 따라 변경될 수 있는 값이고 dp는 고정된 크기 값 -->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text1_message"
+        android:textSize="30sp"
+        android:textColor="@color/button_text"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text1_message"
+        android:textSize="30dp"
+        android:textColor="@color/button_text"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text Color"
+        android:textSize="40sp"
+        android:textColor="@color/primary_color"
+        android:fontFamily="@font/cookierunblack"
+        android:background="@color/txt_bg_color"
+        android:backgroundTint="@color/teal_200"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/footer_1_company_address"
+        android:textSize="20sp"
+        android:textColor="@color/primary_color"
+        android:fontFamily="@font/cookierunblack"
+        android:background="@color/txt_bg_color"
+        android:backgroundTint="@color/teal_200"
+        />
 
 </LinearLayout>
