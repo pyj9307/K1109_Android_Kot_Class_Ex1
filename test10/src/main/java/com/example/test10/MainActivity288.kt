@@ -27,6 +27,7 @@ class MainActivity288 : AppCompatActivity() {
             AlertDialog.Builder(this).run {
                 setTitle("Input")
                 setView(dialogBinding.root)
+                setIcon(R.drawable.person1)
                 dialogBinding.edit1.setOnClickListener{
                     Log.d("lsy", "에디터 뷰 선택 한번 해봄")
                     ToastTest("토스트도 연습")

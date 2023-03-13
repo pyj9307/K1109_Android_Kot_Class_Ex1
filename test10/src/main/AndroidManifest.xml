@@ -27,7 +27,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestLab">
-        <!--<activity
+        <activity
             android:name=".MainActivity306"
             android:exported="true">
             <intent-filter>
@@ -96,7 +96,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        -->
         <activity
             android:name=".MainActivity288"
             android:exported="true">
@@ -106,7 +105,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
         <activity
             android:name=".MainActivity282"
             android:exported="true">
@@ -143,7 +141,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
     </application>
 
 </manifest>
