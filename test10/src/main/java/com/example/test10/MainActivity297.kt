@@ -44,6 +44,7 @@ class MainActivity297 : AppCompatActivity() {
                 channel.enableLights(true)
                 channel.lightColor = Color.RED
                 channel.enableVibration(true)
+                channel.setShowBadge(true)
                 channel.vibrationPattern = longArrayOf(100, 200, 100, 200)
                 //채널을 NotificationManager에 등록
                 manager.createNotificationChannel(channel)
