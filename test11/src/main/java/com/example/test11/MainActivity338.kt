@@ -12,7 +12,9 @@ class MainActivity338 : AppCompatActivity() {
 
         val fragmentManager: FragmentManager = supportFragmentManager
         val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-        val fragment = OneFragment()
+//        val fragment = OneFragment()
+//        val fragment = TwoFragment()
+        val fragment = ThreeFragment()
         transaction.add(R.id.fragment_content, fragment)
         transaction.commit()
     }
