@@ -1,0 +1,11 @@
+1.
+viewPagerTestActivity(뷰는 자동으로 만들어짐)
+2.
+viewitem.xml
+3.
+데이터는 4개, 텍스트 뷰 말고,
+임의의 이미지 4개 넣기.
+4. 뷰페이저2 출력해보기.
+시간 10분
+5. 참고 코드 : MainActivity354.kt, item_354.xml,
+ activity_main354.xml

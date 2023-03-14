@@ -92,7 +92,7 @@ class TestActivity : AppCompatActivity() {
     class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
         override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
             super.onDraw(c, parent, state)
-            c.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.stadium), 0f,0f,null);
+            c.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.cat_image), 0f,0f,null);
         }
 
         override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
