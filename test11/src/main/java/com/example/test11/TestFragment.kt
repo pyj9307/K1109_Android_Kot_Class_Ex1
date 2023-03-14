@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.test11.databinding.FragmentOneBinding
+import com.example.test11.databinding.FragmentTestBinding
+/**
+ * A simple [Fragment] subclass.
+ * Use the [TestFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class TestFragment : Fragment() {
+    lateinit var binding: FragmentTestBinding
 
-
-class OneFragment : Fragment() {
-    // activity_main337 에 name으로 지정된 위치를 불러옴
-    lateinit var binding: FragmentOneBinding
     override fun onCreateView(
-        // onCreateView 결과는 뷰를 반환한다.
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOneBinding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
+        binding = FragmentTestBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
