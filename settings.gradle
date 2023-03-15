@@ -30,4 +30,5 @@ include ':test11'
 include ':ch11_jetpack'
 include ':ch12_material'
 include ':test12'
-include ':test13'
+project(':test13_1').projectDir = new File(rootDir, 'test13/')
+include ':test13_2'

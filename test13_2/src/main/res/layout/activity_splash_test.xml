@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="goDetail" />
+    android:orientation="vertical"
+    tools:context=".SplashTestActivity">
 
     <TextView
-        android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Splash테스트화면입니다."
         android:textSize="20sp"
+        android:fontFamily="@font/cookierunblack"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/lake_1"
         />
 
 </LinearLayout>

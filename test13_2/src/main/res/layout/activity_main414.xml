@@ -13,11 +13,10 @@
         android:layout_height="wrap_content"
         android:text="goDetail" />
 
-    <TextView
-        android:id="@+id/result"
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        />
+        android:text="goDetail" />
 
 </LinearLayout>
