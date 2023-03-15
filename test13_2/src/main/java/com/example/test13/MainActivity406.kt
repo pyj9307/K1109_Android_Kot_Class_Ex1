@@ -6,8 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.test13.databinding.ActivityMain406Binding
-import com.example.test13.databinding.ActivityMainBinding
+import com.example.test13_2.databinding.ActivityMain406Binding
 
 class MainActivity406 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

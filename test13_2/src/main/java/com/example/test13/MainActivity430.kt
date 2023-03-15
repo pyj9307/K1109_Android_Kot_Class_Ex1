@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import com.example.test13_2.R
 
 class MainActivity430 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

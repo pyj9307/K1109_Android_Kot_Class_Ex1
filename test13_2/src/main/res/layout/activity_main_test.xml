@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainTestActivity">
+    tools:context="com.example.test13.MainTestActivity">
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="goDetail" />
+        android:text="메인 화면입니다."
+        android:textSize="20sp"
+        />
 
     <TextView
         android:id="@+id/detailId"
@@ -26,5 +28,11 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="goDetail" />
 
 </LinearLayout>

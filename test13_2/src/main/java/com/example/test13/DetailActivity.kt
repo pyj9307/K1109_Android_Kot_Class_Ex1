@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.test13.databinding.ActivityDetailBinding
+import com.example.test13_2.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailBinding

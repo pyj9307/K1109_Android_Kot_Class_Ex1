@@ -5,17 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.test13.databinding.ActivityMain406Binding
-import com.example.test13.databinding.ActivityMainBinding
-import com.example.test13.databinding.ActivityMainTestBinding
-import com.google.android.material.tabs.TabLayoutMediator
+import com.example.test13_2.databinding.ActivityMainTestBinding
 
 class MainTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

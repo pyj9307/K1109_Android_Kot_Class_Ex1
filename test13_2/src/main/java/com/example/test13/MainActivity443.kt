@@ -3,7 +3,7 @@ package com.example.test13
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.test13.databinding.ActivityMain443Binding
+import com.example.test13_2.databinding.ActivityMain443Binding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach

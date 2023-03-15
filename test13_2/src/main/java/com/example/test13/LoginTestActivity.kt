@@ -3,14 +3,12 @@ package com.example.test13
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.test13.databinding.ActivityDetailBinding
-import com.example.test13.databinding.ActivityLoginTestBinding
+import com.example.test13_2.databinding.ActivityLoginTestBinding
 
 class LoginTestActivity : AppCompatActivity() {
-    lateinit var binding: ActivityLoginTestBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginTestBinding.inflate(layoutInflater)
+        val binding = ActivityLoginTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 메인 액티비티에서 넘어온 값을 가지고 오는 부분
@@ -20,6 +18,8 @@ class LoginTestActivity : AppCompatActivity() {
 //        binding.detailPass.text = "pass: $data2"
 
         binding.detailButton.setOnClickListener {
+//            val detailId = binding.detailId.text.toString()
+//            val detailPass = binding.detailPass.text.toString()
             val intent: Intent = Intent(this, MainTestActivity::class.java)
 //            intent.putExtra("result","world")
             intent.putExtra("detailId",binding.detailId.text.toString())

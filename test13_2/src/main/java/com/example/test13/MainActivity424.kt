@@ -3,7 +3,7 @@ package com.example.test13
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.test13.databinding.ActivityMain424Binding
+import com.example.test13_2.databinding.ActivityMain424Binding
 
 class MainActivity424 : AppCompatActivity() {
     var count = 0

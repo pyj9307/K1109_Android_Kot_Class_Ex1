@@ -4,8 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.test13.databinding.ActivityMain406Binding
-import com.example.test13.databinding.ActivityMain414Binding
+import com.example.test13_2.databinding.ActivityMain406Binding
+import com.example.test13_2.databinding.ActivityMain414Binding
 
 class MainActivity414 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

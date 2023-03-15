@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="K1109_Android_Kot_Class_Ex1.mytest1.test6_6" target="11" />
+      <module name="K1109_Android_Kot_Class_Ex1.test13_1" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
