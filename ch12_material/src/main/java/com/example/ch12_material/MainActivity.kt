@@ -1,8 +1,11 @@
 package com.example.ch12_material
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -29,6 +32,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.mainDrawerView.setNavigationItemSelectedListener {
+            val intent = Intent(this,LoginActivity::class.java)
+            Log.d("lsy","제목 찍어보기 : ${it.title}")
+            when(it.title){
+                "Login" ->
+//                Toast.makeText(this@MainActivity,"로그인화면 이동",Toast.LENGTH_SHORT).show()
+                startActivity(intent)
+
+                "아이템2" ->
+                    Toast.makeText(this@MainActivity,"아이템2 확인",Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
 
         //add......................................
         setSupportActionBar(binding.toolbar)
