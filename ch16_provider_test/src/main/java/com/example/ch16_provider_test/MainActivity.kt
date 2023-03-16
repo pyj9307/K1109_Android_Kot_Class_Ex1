@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.ch16_provider_test
 
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -10,15 +10,18 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.ch16_provider_test.databinding.ActivityMainBinding
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
     lateinit var binding: ActivityMainBinding
     lateinit var filePath: String
+    lateinit var file: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +32,11 @@ class MainActivity : AppCompatActivity() {
         //gallery request launcher..................
         // 갤러리에서 선택된 사진이 후처리로 넘어오면,
         // it에 담겨있음.(기본 설정)
-        // requestGalleryLauncher는 임의로 이름 지정한 거
-        // registerForActivityResult(ActivityResultContracts.StartActivityForResult()) 는 갖다 쓴다고 이해
         val requestGalleryLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
         {
             try {
-                // calculateInSampleSize : 사진의 크기를 적절히 화면 비율에
+                // calculateInSampleSize : 사진의 크기를 적절히 화면 비율에 맞게 재조정하는 함수
                 val calRatio = calculateInSampleSize(
                     it.data!!.data!!,
                     resources.getDimensionPixelSize(R.dimen.imgSize),
@@ -44,7 +45,54 @@ class MainActivity : AppCompatActivity() {
                 val option = BitmapFactory.Options()
                 option.inSampleSize = calRatio
 
+                // 넘어온 사진의 바이트로 읽은 객체 존재.
                 var inputStream = contentResolver.openInputStream(it.data!!.data!!)
+
+                // 파일에 출력 하기.
+
+                val timeStamp: String =
+                    SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+                val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                val file = File.createTempFile(
+                    "JPEG_${timeStamp}_",
+                    ".jpg",
+                    storageDir
+                )
+                filePath = file.absolutePath
+                val photoURI: Uri = FileProvider.getUriForFile(
+                    this,
+                    "com.example.ch16_provider_test.fileprovider",
+                    file
+                )
+
+                // 갤러리에서 선택 된 사진를 it 으로 받았고,
+                // 위에서 사진의 정보를 바이트로 읽은 inputStream 존재.
+                // 내가 만든 임의의 파일에 쓰기 작업을 하는 코드.
+                try {
+                    val buff = ByteArray(1024 * 4)
+                    val os: OutputStream = FileOutputStream(file)
+                    while (true) {
+                        val readed: Int
+                        readed = inputStream!!.read(buff);
+
+                        if (readed == -1) {
+                            break;
+                        }
+                        os.write(buff, 0, readed);
+                        //write buff
+//                    downloaded += readed;
+                    }
+                    os.flush();
+                    os.close();
+
+                } catch (e: IOException) {
+                    e.printStackTrace();
+                } finally {
+                    if (inputStream != null) {
+                        inputStream.close();
+                    }
+                }
+
                 val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
                 inputStream!!.close()
                 inputStream = null
@@ -57,14 +105,6 @@ class MainActivity : AppCompatActivity() {
             }catch (e: Exception){
                 e.printStackTrace()
             }
-        }
-
-
-        binding.galleryButton.setOnClickListener {
-            //gallery app........................
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            intent.type = "image/*"
-            requestGalleryLauncher.launch(intent)
         }
 
         //camera request launcher.................
@@ -84,6 +124,39 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        binding.galleryButton.setOnClickListener {
+            //gallery app........................
+            //실습 작업
+            val timeStamp: String =
+                SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            val file = File.createTempFile(
+                "JPEG_${timeStamp}_",
+                ".jpg",
+                storageDir
+            )
+            filePath = file.absolutePath
+            val photoURI: Uri = FileProvider.getUriForFile(
+                this,
+                "com.example.ch16_provider_test.fileprovider",
+                file
+            )
+            Log.d("lsy","갤러리에서 선택한 사진 위치"+filePath.toString())
+
+//            val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+//            requestGalleryLauncher.launch(intent)
+//            val intent = Intent(Intent.ACTION_PICK)
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+//            requestGalleryLauncher.launch(intent)
+//            requestCameraFileLauncher.launch(intent)
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            intent.type = "image/*"
+            requestGalleryLauncher.launch(intent)
+        }
+
+
+
+
         binding.cameraButton.setOnClickListener {
             //camera app......................
             //파일 준비...............
@@ -98,18 +171,20 @@ class MainActivity : AppCompatActivity() {
             filePath = file.absolutePath
             val photoURI: Uri = FileProvider.getUriForFile(
                 this,
-                "com.example.myapplication.fileprovider",
+                "com.example.ch16_provider_test.fileprovider",
                 file
             )
+            Log.d("lsy","카메라에서 촬영한 사진 위치"+filePath.toString())
+
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
             requestCameraFileLauncher.launch(intent)
 
         }
     }
-
     // 사진의 크기 조정하는 임의의 함수
-    // 첫번째 매개변수 fileUri : 사진의 위치주소, 두번째 reqWidth : 원하는 폭, 세번째 reqWidth : 원하는 높이
+    // 첫번째 매개변수 fileUri : 사진의 위치주소,
+    // 두번째 reqWidth : 원하는 폭, 세번째 reqWidth : 원하는 높이
     private fun calculateInSampleSize(fileUri: Uri, reqWidth: Int, reqHeight: Int): Int {
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
@@ -139,5 +214,4 @@ class MainActivity : AppCompatActivity() {
         }
         return inSampleSize
     }
-
 }

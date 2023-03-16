@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.ch16_provider_test
 
 import org.junit.Test
 
