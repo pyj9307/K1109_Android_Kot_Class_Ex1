@@ -62,7 +62,7 @@ class MainActivity424 : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         Log.d("kkang","onSaveInstanceState..........")
-        outState.putString("data1", "hello")
+        outState.putString("data1", "hello1")
         outState.putInt("data2", 10)
         Log.d("lsy","onSaveInstanceState 호출 부분. onSaveCount 횟수 : $onSaveCount")
         onSaveCount++

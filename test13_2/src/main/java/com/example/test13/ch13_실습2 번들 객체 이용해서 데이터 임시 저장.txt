@@ -1,0 +1,10 @@
+1. 앞에 실습한 로그인 액티비티에서
+아이디와 패스워드를 입력 후, 화면을 회전 시,
+아이디와 패스워드가 값이 그대로 유지하게 하기.
+참고파일
+MainActivity424
+참고메서드
+1)
+    override fun onSaveInstanceState(outState: Bundle)
+2)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle)

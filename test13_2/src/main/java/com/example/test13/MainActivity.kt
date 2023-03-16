@@ -20,6 +20,6 @@ class MainActivity : AppCompatActivity() {
         }
         val result = intent.getStringExtra("result")
         binding.result.text = "$result"
-        Log.d("lsy","디테일 액티비티에서 넘어온 result 값 : $result")
+        Log.d("lsy","디테일 액티비티에서 넘어 온 result 값 : $result")
     }
 }

@@ -11,6 +11,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/cookierunblack"
         android:text="메인 화면입니다."
         android:textSize="20sp"
         />

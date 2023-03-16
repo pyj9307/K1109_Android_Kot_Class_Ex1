@@ -15,11 +15,13 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:textSize="35dp"
+        android:fontFamily="@font/cookierunblack"
         android:textStyle="bold"/>
     <Button
         android:id="@+id/plusCountButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/cookierunblack"
         android:textSize="25dp"
         android:text="Count"/>
 

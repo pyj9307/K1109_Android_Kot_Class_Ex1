@@ -15,6 +15,6 @@ class SplashTestActivity : AppCompatActivity() {
         val intent = Intent(this@SplashTestActivity,MainTestActivity::class.java)
         startActivity(intent)
         finish()
-    },4000)
+    },4001)
 }
 }

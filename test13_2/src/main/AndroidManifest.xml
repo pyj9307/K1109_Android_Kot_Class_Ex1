@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestLab">
+        <!--모듈 내 전체 액티비티의 테마 스타일 적용-->
         <activity
             android:name="com.example.test13.LoginTestActivity"
             android:exported="true">
@@ -66,7 +67,11 @@
         </activity>
         <activity
             android:name="com.example.test13.MainActivity426"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.430">
+            <!--모듈 내에서 이 액티비티만 테마 스타일 따로 적용-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
