@@ -45,7 +45,9 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult())
         {
             if(it.resultCode == RESULT_OK){
-                Log.d("kkang", "${it.data?.data}")
+                Log.d("kkang", "it의 값 보기 : ${it}")
+                Log.d("kkang", "it의 data 하위의 data 값 보기 : ${it.data?.data}")
+                Log.d("kkang", "it의 resultCode 값 보기 : ${it.resultCode}")
 
                 val cursor = contentResolver.query(
                     it!!.data!!.data!!,
