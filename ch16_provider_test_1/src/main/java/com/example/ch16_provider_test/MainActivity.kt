@@ -106,29 +106,6 @@ class MainActivity : AppCompatActivity() {
         binding.galleryButton.setOnClickListener {
             //gallery app........................
             //실습 작업
-            file = ""
-//            val timeStamp: String =
-//                SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-//            val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-//            val file = File.createTempFile(
-//                "LSYTEST_${timeStamp}_",
-//                ".jpg",
-//                storageDir
-//            )
-//            filePath = file.absolutePath
-//            val photoURI: Uri = FileProvider.getUriForFile(
-//                this,
-//                "com.example.ch16_provider_test.fileprovider",
-//                file
-//            )
-//            Log.d("lsy","갤러리에서 선택한 사진 위치"+filePath.toString())
-
-//            val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
-//            requestGalleryLauncher.launch(intent)
-//            val intent = Intent(Intent.ACTION_PICK)
-//            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-//            requestGalleryLauncher.launch(intent)
-//            requestCameraFileLauncher.launch(intent)
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.type = "image/*"
             requestGalleryLauncher.launch(intent)
