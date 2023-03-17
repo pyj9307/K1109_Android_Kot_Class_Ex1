@@ -48,7 +48,7 @@ class MainActivity546 : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult())
         {
             try {
-// calculateInSampleSize : 사진의 크기를 적절히 화면 비율에 맞게 재조정하는 함수
+                // calculateInSampleSize : 사진의 크기를 적절히 화면 비율에 맞게 재조정하는 함수
                 val calRatio = calculateInSampleSize(
                     it.data!!.data!!,
                     resources.getDimensionPixelSize(R.dimen.imgSize),
