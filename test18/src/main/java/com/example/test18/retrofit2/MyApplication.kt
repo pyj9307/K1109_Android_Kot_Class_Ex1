@@ -5,15 +5,22 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MyApplication: Application() {
+    // 레트로핏2 통신을 위해서 반드시 정의가 되어야하는 객체 2가지. (networkService(INetworkService 타입 변수), retrofit(Retrofit 타입 변수))
     var networkService: INetworkService
 
+    // baseUrl 부분에 백엔드 부분의 아이피 주소를 입력합니다
+    // 스프링 서버를 연동하는 부분에서도, 서버의 아이피 주소를 여기에 입력
+    // localhost:8080/ -> 아이피를 실제로 입력을 권함
     val retrofit: Retrofit
         get() = Retrofit.Builder()
             .baseUrl("https://reqres.in/")
+            // 여기는 해당 JSON 타입의 값으로 변환해주는 라이브러리를 부품 교체식으로
+            // 교체해서 사용하면 됨. GsonConverterFactory.create()
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
     init {
+        // networkService에 INetworkService.kt 를 연결해 둠
         networkService = retrofit.create(INetworkService::class.java)
     }
 }

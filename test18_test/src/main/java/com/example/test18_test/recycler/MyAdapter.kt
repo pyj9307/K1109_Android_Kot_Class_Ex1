@@ -1,12 +1,12 @@
-package com.example.ch18_network.recycler
+package com.example.test18_test.recycler
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ch18_network.databinding.ItemMainBinding
-import com.example.ch18_network.model.ItemModel
+import com.example.test18_test.model.ItemModel
+import com.example.test18_test.databinding.ItemMainBinding
 
 
 class MyViewHolder(val binding: ItemMainBinding): RecyclerView.ViewHolder(binding.root)
