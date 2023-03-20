@@ -7,16 +7,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원가입"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -32,26 +22,20 @@
             />
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/cameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Camera App"
-        android:layout_marginTop="24dp"/>
-
-    <EditText
+    <TextView
         android:id="@+id/email_editView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="이메일"
+        android:hint="이메일 불러오기"
         android:inputType="textEmailAddress"/>
 
-    <EditText
+    <TextView
         android:id="@+id/pass_editView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="패스워드"
+        android:hint="패스워드 불러오기"
         android:inputType="text"/>
+
 
 
 </LinearLayout>

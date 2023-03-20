@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.provider.ContactsContract.CommonDataKinds.Email
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,6 +22,8 @@ class JoinActivity : AppCompatActivity() {
     lateinit var binding: ActivityJoinBinding
     // 파일 경로를 담을 변수 선언
     lateinit var filePath: String
+    lateinit var userEmail: String
+    lateinit var userPass: String
     // 이메일 문자열을 담는 배열
     var datas: MutableList<String>? = null
     // 패스워드 문자열을 담는 배열
@@ -54,9 +57,13 @@ class JoinActivity : AppCompatActivity() {
         binding.cameraButton.setOnClickListener {
             //camera app......................
             //파일 준비...............
+            // timeStamp에 날짜시분초로 문자열 생성
             val timeStamp: String =
                 SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            // storageDir 안드로이드에서 자동으로 생성해주는 외부 임시 파일 경로 문자열 생성
             val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            // createTempFile로 prefix, suffix로 지정한 파일이름 규칙으로
+            // storageDir에 담긴 경로에 파일 저장
             val file = File.createTempFile(
                 "LSY${timeStamp}_",
                 ".jpg",
@@ -79,6 +86,8 @@ class JoinActivity : AppCompatActivity() {
             pref.edit().run {
                 putString("imgfileUri", photoURI.toString())
                 putString("imgfile", filePath)
+//                putString("email_editView", binding.emailEditView.text.toString())
+//                putString("pass_editView", binding.passEditView.text.toString())
                 commit()
             }
             val resultStr2 : String? = pref.getString("imgUri","값이 없으면 디폴트값이 옵니다.")
@@ -94,10 +103,33 @@ class JoinActivity : AppCompatActivity() {
 
         }
 
+        // 회원 가입 버튼을 눙ㄹ러서 정보를 전달하려면 인텐트를 이용해
+        // 단순 이동으로 사용하겠음. 일단
+        binding.joinButton.setOnClickListener{
+            userEmail = binding.emailEditView.text.toString()
+            userPass = binding.passEditView.text.toString()
 
+            // 공유 프리퍼런스라는 파일에 사진의 위치정보, 이메일, 패스워드를 인자값으로
+            // 전달하면 파일에 저장한다.
+            upLoadUserData(filePath, userEmail, userPass)
 
+            // 단순 이동으로만 시용
+            val intent = Intent(this@JoinActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
+    private fun upLoadUserData(imgFilePath:String, userEmail: String, userPass: String){
+        val pref = getSharedPreferences("joinTest", Context.MODE_PRIVATE)
+        // 키, 값의 형태로 저장하는 방식
+        // commit을 하게 되면 실제 공유 프레퍼런스 저장소 파일에 저장.
+        pref.edit().run {
+            putString("email", userEmail)
+            putString("pass", userPass)
+            putString("imgfile", imgFilePath)
+            commit()
+        }
+    }
 
     // 프로필 사진 자르기
     private fun calculateInSampleSize(fileUri: Uri, reqWidth: Int, reqHeight: Int): Int {
