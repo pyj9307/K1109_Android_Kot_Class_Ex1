@@ -11,27 +11,27 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import com.example.test17_test.databinding.ActivityLoginBinding
-import com.example.test17_test.databinding.ActivityMainBinding
+import com.example.test17_test.databinding.ActivityJoinBinding
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LoginActivity : AppCompatActivity() {
-    lateinit var binding: ActivityLoginBinding
+class JoinActivity : AppCompatActivity() {
+    // 바인딩 변수 선언
+    lateinit var binding: ActivityJoinBinding
+    // 파일 경로를 담을 변수 선언
     lateinit var filePath: String
     // 이메일 문자열을 담는 배열
     var datas: MutableList<String>? = null
     // 패스워드 문자열을 담는 배열
     var datas2: MutableList<String>? = null
-    // MyAdapter 클래스명으로 만들었음. 리사이클러뷰 사용하기 위해서 필요한 재료
-    lateinit var adapter: MyAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityJoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 카메라작동 런처
+        // 카메라앱 불러서 사진 찍고 후처리 코드.
         val requestCameraFileLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()){
             val calRatio = calculateInSampleSize(
@@ -39,10 +39,13 @@ class LoginActivity : AppCompatActivity() {
                 resources.getDimensionPixelSize(R.dimen.imgSize),
                 resources.getDimensionPixelSize(R.dimen.imgSize)
             )
+            // 비트맵 형식으로 해당 옵션을 사용하겠다.
             val option = BitmapFactory.Options()
             option.inSampleSize = calRatio
+            // 해당 파일 경로의 파일을 읽어서 비트맵 형으로 반환하고, 옵션 적용하기
             val bitmap = BitmapFactory.decodeFile(filePath, option)
             bitmap?.let {
+                // 사용자 프로필 이미지에 사진 붙이기 작업
                 binding.userImageView.setImageBitmap(bitmap)
             }
         }
@@ -60,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 storageDir
             )
             filePath = file.absolutePath
+            // FileProvider 콘텐츠 프로바이더를 이용하려면 매니페스트에 등록 및 xml 추가 파일 작업이 필요함.
             val photoURI: Uri = FileProvider.getUriForFile(
                 this,
                 "com.example.test17_test.fileprovider",

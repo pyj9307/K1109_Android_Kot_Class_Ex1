@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="이메일"
-        android:inputType="text"/>
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/pass_editView"

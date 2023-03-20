@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.K1109_Android_Kot_Class_Ex1">
         <activity
-            android:name=".LoginActivity"
+            android:name=".JoinActivity"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
