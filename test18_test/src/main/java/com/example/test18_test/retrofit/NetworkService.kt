@@ -6,11 +6,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NetworkService {
-    @GET("/v2/everything")
+
+
+    @GET("/api/food/img")
     fun getList(
-        @Query("language") language: String?,
-        @Query("apiKey") apiKey: String?,
-        @Query("page") page: Long,
-        @Query("pageSize") pageSize: Int
+        @Query("serviceKey") serviceKey: String?,
+        @Query("pageNo") pageNo: Int
     ): Call<PageListModel>
+
 }

@@ -57,7 +57,7 @@ class MainActivity443 : AppCompatActivity() {
             backgroundScope.launch {
                 var sum = 0L
                 var time = measureTimeMillis {
-                    for (i in 1..2_000_000_000000) {
+                    for (i in 1..2_000_000_000) {
                         sum += i
                     }
                 }

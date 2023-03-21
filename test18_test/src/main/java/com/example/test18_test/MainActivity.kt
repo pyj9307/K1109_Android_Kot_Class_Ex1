@@ -1,49 +1,56 @@
 package com.example.test18_test
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.util.Log
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test18_test.databinding.ActivityMainBinding
+import com.example.test18_test.model.PageListModel
+import com.example.test18_test.recycler.MyAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var retrofitFragment: RetrofitFragment
-    var mode = "retrofit"
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        val serviceKey = "tVW2KFmuQi45yJsJGHm71Ud8PRLHZJvrLgyJp7NYkEaT0aVvlkr82a5JJJZrVu4O"
+
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        retrofitFragment= RetrofitFragment()
+        val networkService = (applicationContext as MyApplication).networkService
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.activity_content, retrofitFragment)
-            .commit()
-//        supportActionBar?.title="Volley Test"
+        val userListCall = networkService.getList(serviceKey,1)
+        Log.d("lsy", "url:" + userListCall.request().url().toString())
+
+        userListCall.enqueue(object : Callback<PageListModel> {
+            override fun onResponse(call: Call<PageListModel>, response: Response<PageListModel>) {
+
+                val userList = response.body()
+                Log.d("lsy","userList data 값 : ${userList?.body}")
+                //.......................................
+
+                binding.recyclerView.adapter= MyAdapter(this@MainActivity, userList?.body)
+
+                binding.recyclerView.addItemDecoration(
+                    DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL)
+                )
+
+//                binding.pageView.text=userList?.page
+//                binding.totalView.text=userList?.total
+            }
+
+            override fun onFailure(call: Call<PageListModel>, t: Throwable) {
+                call.cancel()
+            }
+        })
+
+
+
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if(item.itemId === R.id.menu_volley && mode !== "volley"){
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.activity_content)
-//                .commit()
-//            mode="volley"
-//            supportActionBar?.title="Volley Test"
-//        }else if(item.itemId === R.id.menu_retrofit && mode !== "retrofit"){
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.activity_content, retrofitFragment)
-//                .commit()
-//            mode="retrofit"
-//            supportActionBar?.title="Retrofit Test"
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 }

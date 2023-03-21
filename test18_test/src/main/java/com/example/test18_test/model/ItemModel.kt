@@ -1,10 +1,10 @@
 package com.example.test18_test.model
 
-class ItemModel {
-    var id: Long = 0
-    var author: String? = null
-    var title: String? = null
-    var description: String? = null
-    var urlToImage: String? = null
-    var publishedAt: String? = null
-}
+import com.google.gson.annotations.SerializedName
+
+data class ItemModel (
+    @SerializedName("RSTR_NM")
+    var RSTR_NM: String,
+    @SerializedName("FOOD_IMG_URL")
+    var FOOD_IMG_URL: String
+)
