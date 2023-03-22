@@ -9,6 +9,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
 class MyApplication: MultiDexApplication() {
+    // static과 같은 효과, 클래스 명으로 바로 메서드 호출가능.
     companion object {
         lateinit var auth: FirebaseAuth
         var email: String? = null

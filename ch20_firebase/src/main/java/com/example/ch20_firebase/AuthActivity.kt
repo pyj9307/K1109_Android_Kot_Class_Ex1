@@ -1,6 +1,7 @@
 package com.example.ch20_firebase
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,9 +25,11 @@ class AuthActivity : AppCompatActivity() {
             changeVisibility("logout")
         }
 
+        // 인텐트 후 처리
         val requestLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
         {
+            Log.d("lsy","구글 인증 버튼 클릭 후, 후처리되는 부분의 it.data : ${it.data.toString()}")
             //구글 로그인 결과 처리...........................
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try {
@@ -36,6 +39,7 @@ class AuthActivity : AppCompatActivity() {
                     .addOnCompleteListener(this){ task ->
                         if(task.isSuccessful){
                             MyApplication.email = account.email
+                            Log.d("lsy","구글 인증 버튼 클릭 후, account.email : ${account.email}")
                             changeVisibility("login")
                         }else {
                             changeVisibility("logout")
