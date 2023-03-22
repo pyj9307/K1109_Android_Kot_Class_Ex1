@@ -6,5 +6,116 @@
 2. File -> Invalid cache -> 옵션에 3개 다 선택 후, 리스타
 3. 가사 에뮬레이터를 새로 설치 후 , 다시 앱을 실행.
 
+파이어 베이스 연동 부분에서 연결 부분 이슈
+
+1. 새로 만들어서 작업을 할 때 주의사항
+매니페스트에 설정된 값을 잘 복사
+
+2. build.gradle 파일에서 프로젝트, 모듈 두가지 있음.
+기존에 임포트한 원본 파일에서
+ch20 firebase build.gradle에서
+
+plugins {
+    id 'com.google.gms.google-services'
+} 삭제
+
+dependencies {
+    implementation 'com.google.gms:google-services:4.3.15'
+} 추가
+
+
+예)
+build.gradle 프로젝트 버전
+buildscript {
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.10'
+    }
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.4.1' apply false
+    id 'com.android.library' version '7.4.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0' apply false
+}
+
+모듈 버전의 build.gradle
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.ch20_firebase"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // 앱 빌드 할 때, "Cannot fit requested classes ina single dex file" 오류가 나는데
+        // 이걸 방지하기 위해서 multiDexEnabled true
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    implementation 'com.google.gms:google-services:4.3.15'
+    implementation platform ('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.google.firebase:firebase-bom:29.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.firebaseui:firebase-ui-storage:8.0.0'
+    implementation 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
+
+}
+
+3.
+안드로이드 스튜디오 계정을 로그인 했을 때의 아이디와
+파이어베이스 콘솔에서의 계정이 일치해야합니다.
+
+4. 기존에 모듈을 다시 임포트하고 쓰기를 추천
+
 
 

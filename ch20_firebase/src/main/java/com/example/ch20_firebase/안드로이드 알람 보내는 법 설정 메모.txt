@@ -1,0 +1,324 @@
+221212
+FCM 
+21장 테스트 중.
+에뮬레이터에서 설치된 앱 ch20_firebase 삭제 후 , 디버그로 실행 
+로그캣에 kkang 으로 검색해서, 
+fcm token.... eDyYSABNQSGnYOdrAFQ0BA:APA91bEBb84Gm0JIYswaPokA7qfPJq0UT5ctCftC_L8bNQfB6TDq6xJjmsIqsUe1Jsvgp6v0uVqQu6y_QUqEeZ8lgS1i7LbDG4cbHv1hzoTkRhNntVLwve7KxJmW1T9ghbV5VaYhnthQ
+토큰 값 찾아 놓기. 
+!
+1)
+파이어베이스 콘솔에서 Messaging 으로 1차 테스트. 
+새캠페인 -> 알림 -> 알림 제목 -> 알림 텍스트 입력 
+-> 테스트 메시지 전송 -> FCM 등록 토큰 추가 
+-> 최근에 사용한 항목 선택. -> 테스트 클릭. 
+앱을 백그라운드 상황에서 테스트 하면 됨. 
+
+
+2) 포스트 맨 2차시도 
+앱에서 삭제 후 새로 실행을 하면 앱을 설치, 로그캣에 해당 토큰 값이 출력.
+e65SZfR6Ro6q1oui3B_HAI:APA91bHfI1QtWQBnZrQ1GdFajJFwPt2ASU378f03NBC2wVPM3XtHzg3kSACbUfas8I52qk1sK9RiQVSRdBuFfI4PBqhOKryuEkuaoq-85LwZP1EYebucXlWv23QdiYyR4w6psTpQBOPH
+
+결과 -> 로그캣에서 확인 가능
+잠시 보류, 
+파이어베이스 클라우드 메시징 서버키 부분에서 다시 시도
+프로젝트 개요 톱니바퀴 -> 프로젝트 설정 -> 파이어베이스 콘솔 2번째 탭에서
+Cloud Messaging API(기존)사용 설정됨으로 활성화
+메시징을 앱에 새로 통합하는 경우에는 최신 Firebase Cloud Messaging API(V1)를 사용하세요. Cloud Messaging API(기존)의 기존 사용자인 경우에는 최신 Firebase Cloud Messaging API(V1)로 마이그레이션하는 것을 고려해 보세요. 자세히 알아보기
+
+키	토큰	
+서버 키
+예제)	AAAA0z9KBFk:APA91bHtg91deU7gEE8CbYNmotB96kjOHcZK1Qa2J1uZdhlH-47BmahCRICT0eVEqELArm3VI7Q9D7_gtvmI3jAf0xmqIKmQY0ojCsikwqCJg7t3xippHObIm5dXFJUptsXuOIazQJMP
+받은 서버 키
+AAAASSKmMZo:APA91bES-UCACP70Aui3dS6QNXlvw6XFfowHUKeTBELahbSI322dOi3PNnQsw4wTGfJQYccoHjaCcopG1OeSYma8hyFa4dZb8pJ4Kyd23dSRvIcxMihl7wo4_5HlDJOSR-paJq1D6mWw
+
+필요함. 
+
+포스트 맨 사이트 접속 -> 
+1.
+POST 선택 -> 주소 : https://fcm.googleapis.com/fcm/send 입력 
+
+2.
+-> Header 입력 탭으로 이동 
+예1)
+key : Content-Type
+value : application/json
+
+예2)
+key : Authorization
+value : key=파이에베이스 콘솔에서 서버키
+value : key=AAAASSKmMZo:APA91bES-UCACP70Aui3dS6QNXlvw6XFfowHUKeTBELahbSI322dOi3PNnQsw4wTGfJQYccoHjaCcopG1OeSYma8hyFa4dZb8pJ4Kyd23dSRvIcxMihl7wo4_5HlDJOSR-paJq1D6mWw
+
+Authorization과 Content-Type을 입력
+key : Authorization과
+
+는 FirebaseConsole의 프로젝트 설정 -> 클라우드 메시징에서 복사해온다.
+복사해온 키를 "key=" 텍스트를 직접 입력한 후 그뒤에 붙여주도록 한다.
+웹 구성 ->  웹 푸시 인증서 
+BKoJbyviBIBCIWDAcm9f4TW4Dc6N7CM4YQY3MIpSUDDBa7Ln8NUvPVYmqMX5tmj7hec1kBEjXiOHgMwc0mAO6GU
+value : 
+
+key : Content-Type
+value : application/json
+
+다음은 Body부분 - raw 체크, JSON 선택 후 아래부분을 작성해 입력하면 된다.
+to항목의 토큰 값을 가져오는 방식은 .
+"to":"앱 실행하고 로그캣으로 받은 서버키" (e65SZfR6Ro6q1oui3B_HAI:APA91bHfI1QtWQBnZrQ1GdFajJFwPt2ASU378f03NBC2wVPM3XtHzg3kSACbUfas8I52qk1sK9RiQVSRdBuFfI4PBqhOKryuEkuaoq-85LwZP1EYebucXlWv23QdiYyR4w6psTpQBOPH)
+
+{
+    "to":"e65SZfR6Ro6q1oui3B_HAI:APA91bHfI1QtWQBnZrQ1GdFajJFwPt2ASU378f03NBC2wVPM3XtHzg3kSACbUfas8I52qk1sK9RiQVSRdBuFfI4PBqhOKryuEkuaoq-85LwZP1EYebucXlWv23QdiYyR4w6psTpQBOPH",    
+    "notification": {
+        "title":"알림 테스트11",
+        "body": "알림 테스트11 12:23"
+    },
+    "data":{
+        "title":"FCM Title",
+        "body": "FCM Message"
+    }
+}
+
+
+
+3) node.js 3차시도 
+파이어베이스 콘솔에 -> 프로젝트 개요 -> 톱니 바퀴 클릭 
+-> 4번째 탭 서비스 계정 클릭 -> Node.js -> 새 비공개 키 생성 클릭. 
+바은 파일 이름 변경 : server_key.json 
+내용 
+{
+  "type": "service_account",
+  "project_id": "androidtest-8f15c",
+  "private_key_id": "28186017b83e3e025fbdf9015fe9edfe0446d10d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCf//I7SbvtOcL2\nMJ09mrxUYTuVpLjI665UvL6ibEwU3lRiXLYgvQte8X2CDp8XuQDLlrF8a4W4PDLS\nVKH7mASNpVLGz8l6aeWq7oB5UUrXH2c88xGOainPRpPd+u3jPa4vD6nbjdU8x73T\npdts6n27DOeHu8Og8pHM7sXinE+4oI4U9XNau45jS0X8ACOneID3uBql/l+F2tq4\nPAjmm7MneABqKn8OMNCJu/k1Sunqyrw6wvzn58YaMqifA08bikZbsNqks4NTfNlr\nI851p2VZSYWfXGoC5tsNnXsHMNfr7+o9OmJGPGE71vOqE57vZ/hSqHDG70QiwpqH\nZyf+t3M7AgMBAAECggEAHFcxOHg8je4bzxDYYVedwVKBw+VsB8bbV84g9FM7fLzO\n9KdYaV8i+vvKj/V4D7Mo5Wb5ZEEFbBdZpzDvikmokNB2Y5ndpc3JLShW4GZaW9WH\nq1+gvfmnEzx8p6axaX1884ASRb4PRddZk/o+bkHw6GeGQWAsbD9bPRIUQioO4vRh\nhS7jxcBmtRyeBU17pPy8IK34GY+UNCre1k0b/4MZt6P0KcOm7RjgmyiIsqx+q4sn\nCVkYwcJOMY6boV76QaWHskf2ET5mYylNJuiGrpiqfpLPplzg+sDgKm6FRf/mCyk1\nD11Q4H3yGW9ph2P6fpBZjvWdTaZFU3G2OlkEhVtZTQKBgQDeAI4mIWVBbe3gSlMI\nWEsnI/oa4kTRI0SuVophnk7ZJ1lBTDH4G2uXiDiuMlHeEMUlVj6K7CgzYhIWpGNb\njOIImDl61ZaQYxZ55ldWkvNxP1IF+n9cybiuognDxhX2kk4XJTsqIvGHKjzVzDb1\nsACLKGr05AG/m2Y5GIOUIZggjwKBgQC4gKEw9c6+MDShNI88wMYY3IcxEu8/unRS\nfC45IEAIqK1M208rHWzDrydQXaknBRV3NrovhPh1mf8XBifyv+UQ/U6t3ESvbEyn\nE1JyuPXYZdgAlTo3mx69A4F2bf1clHPUHhu6bhlzl4zuDKs7d8ZANBrglbJ+b/vq\n9tP9OUuAlQKBgQCcl0GtLbMxcqvuoB5vbXAdPKhG3EF0T287lbloX/T4AWRYxbkd\na6H5sdFhNgc/Hw8gZfQZo7g7fjqKFAwtYHNzYoRw20WntOz+sPX8EA19XQ+rPeUm\nevc03wEKQafuU4aXluBjuWAqWiWtHK3LoQjRH4JKGKYPFDsHnP36t7OJiwKBgB3O\nyjv6ungHmbkhoLKUAm0p072d7YFCQmDBJ0abazz642SzWcsBaf0DYzqcpyNisuEb\numDK/skhJBE4MWQKlJt2ESwNlhsxSAEGIh/euflIGumdMlahfQnUcyoLAw/d/Aid\nBKXN+9as+VvMOC3XX/QnduApzziWJwEC96TFiOkxAoGAOCqhceOWn7AjusiC6uuK\nBAkt7deCQt2hR7LYXytFNV9V1DvFCp9I3IIrESPguqwH8EULmYSrZm+QzJ4jsY3g\nlmD8CNt+ZFrBtSSCGoMXlQAoiISjAtDjaN99JQjOMdUm6P1fzZVD5NEz3AyiGI+m\nCuDqlb1GsbsrUgB9ZVR5p5g=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-flxyv@androidtest-8f15c.iam.gserviceaccount.com",
+  "client_id": "111520117002871503604",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-flxyv%40androidtest-8f15c.iam.gserviceaccount.com"
+}
+
+-> 문서 -> 폴더 만들기 이름: fcm_node_server ->
+폴더 안에 cmd 실행 ->( node.js 설치 해두기.) -> 
+npm install firebase-admin
+-> 폴더 안에 파일 만들기 이름 : node_fcm_server.js
+내용 
+var admin=require('firebase-admin')
+var serviceAccount=require('./server_key.json')
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+})
+
+var token="ejSJb80MQUeZCym6P1o86u:APA91bEmFZqBVGqNkMdv2pFKVxJxrYnl9cOOJtVmZ0FhwLvXxIkTlPXCGpe-n_QOG5BQygjYClMGp97CbK043YJUPPN6XNPkmW71G7Wm9R1-kxKJrehIHjcy2vGC2l_zDr5DZB0sl1Pf"
+var fcm_message = {
+    notification: {
+        title:'noti title',
+        body: 'noti body..'
+    },
+    data: {
+        title:'data title',
+        value: '20'
+    },
+    token: token
+}
+
+admin.messaging().send(fcm_message)
+    .then(function(response){
+        console.log('send ok...')
+    })
+    .catch(function(error){
+        console.log('send error...')
+    })
+
+입력 후 : 토큰 (안드로이드 로그캣에서 받은 토큰으로 업데이트) 및 , server_key 파일 위치등 확인. 
+-> 테스트 (cdm 창에 입력)
+node node_fcm_server.js
+-> cmd 콘솔 창에 . send ok 잘 뜸. 
+-> 앱에서 로그캣 확인.
+포그라운드에서 확인시 
+2022-12-12 08:38:57.776 27418-27515/com.example.ch20_firebase D/kkang: fcm message...... {title=data title, value=20}
+결과 확인 됨. 
+
+앱이 백그라운드에 있을 때, 
+알림 메세지 잘뜸. 
+
+
+
+
+
+
+221209
+원본 프로젝트에, 
+1 내꺼 파이어베이스 json 값 복사하고 
+2 MyApplication 에서 , 스프링 주소 및 포트 설정 변경하고
+ .baseUrl("http://192.168.0.21:8083/")
+3 디비 켜고 
+4 실행 해보니.
+5 파이어베이스 실시간 데이터베이스에서 자동으로 컬렉션, 문서, 필드 등이 채워짐
+6 안드로이드 스튜디오 ->Tools -> Firebase -> Realtime Database 설정도 했음
+
+해당 프로젝트 연결 및 파이어베이스 연동 변경 완료
+1) 일기는 삭제도 가능, 여행 리뷰 삭제 안됨. 
+2) 일기 작성시 사진 첨부시, 결과 화면 출력 화면은 동일
+
+
+
+
+221208
+해당 프로젝트 열때, 
+파이어베이스와 연동시, 패키지 명등 변경해서 하면 오류가 많이 발생. 
+일단, 같은 패키지 명으로 해서, sha 발급 받아서, 파이어베이스 등록하고 
+json  값 복사해서 진행하면 진행이 됨. 
+하지만, 실시간 데이터베이스에 기록이 안남음.
+진짜 내 파이어베이스에 연결 , 연동이 되었는지 확인이 필요.
+
+해당 일기장에 사진 첨부시, 같은 사진만 계속 나오는 현상. 
+
+MyApplication.kt 
+   .baseUrl("http://192.168.0.21:8083/")
+변경
+
+spring.datasource.url=jdbc:mysql://localhost:3306/travel_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezon=Asia/Seoul&&characterEncoding=UTF-8
+
+
+===========================================================================================
+패키지 명 변경시 
+https://overface.tistory.com/451
+!
+com.android7.mytravel
+!
+해당 프로젝트 sha1 signingReport 
+SHA1: 7E:95:C7:2C:CD:92:28:EF:E6:F8:1E:52:D0:9D:C2:EE:D2:DB:D8:9E
+===========================================================================================
+파이어베이스 콘솔에서 프로젝트 만들기. 
+
+
+
+
+===========================================================================================
+google-services.json 
+파일을 다시 받아오기. 기존꺼 삭제하고. 
+파이어베이스 기본 연동하기. 
+파이어베이스 콘솔에서 새 프로젝트 만들고 
+등록시 
+sha1 키가 디버그용으로 받기. 
+file -> settings-> experimental
+에서 
+do not build gradle task list during gradle sync 해제 
+그래들 오른쪽 사이드 메뉴에서 
+signingreport 실행해서 콘솔 창에서 복사 해두기. 
+!
+빌드 그래들 설정 파일에서 해다 아이디 준비
+applicationId "com.android7.mytravel"
+!
+등록하고 
+위에
+google-services.json  새로 적용하기. 
+!
+
+안드로이드 에뮬레이터 사진 갤러리 앱 설치하면 보임.
+디바이스 파일 익스플로러에서 스토리지에 -> 에뮬레이터-> 0-> pictures 에 사진 넣기
+재부팅 해보기. (재부팅 -> 에뮬레이터 엑박으로 끄고, 디바이스 매니저에 화살표에서 
+콜드 부트 나우 선택. )
+=========================================================================================
+{
+  "project_info": {
+    "project_number": "907299914841",
+    "project_id": "androidtest-8f15c",
+    "storage_bucket": "androidtest-8f15c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907299914841:android:0cd652bfa60fda6d43dd48",
+        "android_client_info": {
+          "package_name": "com.android4.travel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907299914841-1rb79nb73je3e09q7dfbhd02osl0ur0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android4.travel",
+            "certificate_hash": "7e95c72ccd9228efe6f81e52d09dc2eed2dbd89e"
+          }
+        },
+        {
+          "client_id": "907299914841-ho33o5g4gbkpkp57ce5dgnqbrhs2vh78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC77A5WmhEsf-TAnHNANrM9V2fh0iO35Lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907299914841-ho33o5g4gbkpkp57ce5dgnqbrhs2vh78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907299914841:android:d26095c761a448ea43dd48",
+        "android_client_info": {
+          "package_name": "com.example.ch20_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907299914841-7svrdpen0uvhkmua8fiepb6fcfcm8aop.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ch20_firebase",
+            "certificate_hash": "2ab1d821ef602b35f3c467ebc43ad9eec719d278"
+          }
+        },
+        {
+          "client_id": "907299914841-ho33o5g4gbkpkp57ce5dgnqbrhs2vh78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC77A5WmhEsf-TAnHNANrM9V2fh0iO35Lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907299914841-ho33o5g4gbkpkp57ce5dgnqbrhs2vh78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+=========================================================================================
+
+===============================================================================
+db
+CREATE USER 'and4'@'%' identified by '1234';
+GRANT ALL PRIVILEGES ON *.* to 'and4'@'%';
+flush privileges;
+create database travel_db;
+use travel_db;
+show tables;
+select * from user;
+select * from trip;
+select * from diary;
+select * from chat;
+select * from photo;
+update trip set on_off=1 where title='hhhhh';
+commit;
+
